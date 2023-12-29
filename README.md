@@ -3,6 +3,31 @@
 Just some misc one off standalone scripts for things. Scripts are all standalone.
 
 # Scripts
+## observium-to-dns_ptr.py
+Query observium API for IP addresses known. Will spit out a bind style PTR zone based on router interface names. We use this to import into our dns zones to have nice and accurate traceroutes.
+
+Works for ipv4 and ipv6, has some config options but defaults to adding ip4 and ip6 to entries. Attempts to use standard shorthand names for interfaces. Works well with Cisco and Juniper interface names as-is, further configurable.
+
+Sample output:
+
+```
+$ ./observium-to-dns_ptr.py -n 10.20.8.0/24
+$TTL 14400
+8.20.10.in-addr.arpa. 14400   IN      SOA     ns0.myorg.net. hostmaster.myorg.net. 2023122901 7200 1800 1209600 14400
+8.20.10.in-addr.arpa. 14400   IN      NS      ns1.myorg.net.
+8.20.10.in-addr.arpa. 14400   IN      NS      ns2.myorg.net.
+10.8.20.10.in-addr.arpa.      IN      PTR     r-chippewatc-hub-ae3.ip4.myorg.net.
+13.8.20.10.in-addr.arpa.      IN      PTR     r-mainfield-hub-ae1.ip4.myorg.net.
+14.8.20.10.in-addr.arpa.      IN      PTR     r-franklin-hub-ae1.ip4.myorg.net.
+17.8.20.10.in-addr.arpa.      IN      PTR     r-blackville-hub-ae0.ip4.myorg.net.
+18.8.20.10.in-addr.arpa.      IN      PTR     r-springfield-hub-ae0.ip4.myorg.net.
+21.8.20.10.in-addr.arpa.      IN      PTR     r-markville-isp-ae0.ip4.myorg.net.
+22.8.20.10.in-addr.arpa.      IN      PTR     r-waterloo-hub-ae0.ip4.myorg.net.
+29.8.20.10.in-addr.arpa.      IN      PTR     r-madison-hub-ae10.ip4.myorg.net.
+<...>
+
+```
+
 ## rancid-check-wr-mem.py
 Will loop over files in one or more RANCID directories and compare timestamps to see if it was changed since writing to NVRAM.
 
