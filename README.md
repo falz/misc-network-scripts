@@ -25,6 +25,42 @@ $TTL 14400
 22.8.20.10.in-addr.arpa.      IN      PTR     r-waterloo-hub-ae0.ip4.myorg.net.
 29.8.20.10.in-addr.arpa.      IN      PTR     r-madison-hub-ae10.ip4.myorg.net.
 <...>
+```
+
+## push-configs-via-observium-group.py
+Take config from a local text file and push it to network devices using NAPALM. Uses observium group ID's to choose devices. Ie if you have a group for some specific vendor type (Juniper, Cisco) you'd give it proper config for that platform
+
+Sample output:
+
+```diff
+$ ./push-configs-via-observium-group.py -g 36  -c policy-standards.txt
+
+Password for username 'falz' required to connect to Observium API and to log in to devices.
+
+Password:
+
+Merging the contents of 'policy-standards.txt' into group 36, which contains 6 devices..
+
+
+Working on r-qfx5100-lab..
+[edit groups policy-standards policy-options]
++    community Action_Transit_Prepend1 members 65001:1000;
++    community Action_PeerPub_Prepend1 members 65002:1000;
++    community Action_PeerPriv_Prepend1 members 65003:1000;
++    community Action_Transit_Prepend2 members 65001:2000;
+
+Apply changes to r-qfx5100-lab? [y/N]
+Discarding changes..
+
+Working on r-mx960-lab..
+[edit groups policy-standards policy-options]
++    community Action_Transit_Prepend1 members 65001:1000;
++    community Action_PeerPub_Prepend1 members 65002:1000;
++    community Action_PeerPriv_Prepend1 members 65003:1000;
++    community Action_Transit_Prepend2 members 65001:2000;
+;
+
+Apply changes to r-mx960-lab? [y/N] 
 
 ```
 
