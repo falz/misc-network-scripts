@@ -110,7 +110,7 @@ def check_devices(devices_list, rancid_dirs):
 
             except OSError:
                 print("Could not open/read file:", configfile)
-                sys.exit()
+                #sys.exit()
 
     return(issues)
 
