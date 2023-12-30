@@ -78,8 +78,8 @@ def check_configfile(myfile, hostname):
             print(hostname_split[0])
             print("\tSaved    ", saved_date_obj, "\t", saved_who, sep='')
             print("\tChanged: ", changed_date_obj, "\t", changed_who, " (", timediff, " after Saved)", sep='')
-            print("\tWhen:    ", timesince, " ago", sep='') 
             print("\tBlame:   ", changed_who,  sep='')
+            print("\tWhen:    ", timesince, " ago", sep='') 
             print("")
             issue = True
             
