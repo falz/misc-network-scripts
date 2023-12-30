@@ -71,11 +71,15 @@ def check_configfile(myfile, hostname):
         saved_date_obj = date_convert(saved_date_str)
 
         if saved_date_obj < changed_date_obj:
+            timediff = changed_date_obj - saved_date_obj
+            timesince = now - changed_date_obj
+
             hostname_split = hostname.split(domain)
             print(hostname_split[0])
-            print("\tBlame:  ", changed_who)
-            print("\tChanged:", changed_date_obj, "\t", changed_who)
-            print("\tSaved:  ", saved_date_obj, "\t", saved_who)
+            print("\tSaved    ", saved_date_obj, "\t", saved_who, sep='')
+            print("\tChanged: ", changed_date_obj, "\t", changed_who, " (", timediff, " after Saved)", sep='')
+            print("\tWhen:    ", timesince, " ago", sep='') 
+            print("\tBlame:   ", changed_who,  sep='')
             print("")
             issue = True
             
@@ -132,7 +136,7 @@ if __name__ == "__main__":
                     #print(hostname, model, updown)
                     devices_list.append(hostname)
 
-    now = datetime.now()
+    now = datetime.now().replace(microsecond=0)
 
     print(os.path.basename(__file__), ": Checking RANCID config files if `wr mem` needed")
     print("Checking", len(devices_list), "devices at", now)
